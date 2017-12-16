@@ -3,25 +3,11 @@ use PHPUnit\Framework\TestCase;
 
 class CustomerTest Extends TestCase
 {
-    /**
-     * @var Customer
-     */
-    private $customer;
-
-    /**
-     * @var Token
-     */
     private $token;
 
     public function setUp()
     {
-        $this->customer = new Customer();
-        $this->token = new Token();
-    }
-
-    public function testCreate()
-    {
-        $params = array(
+        $this->token = OmiseToken::create(array(
             'card' => array(
                 'name' => 'Saroj Sangphongamphai',
                 'number' => '4242424242424242',
@@ -29,11 +15,17 @@ class CustomerTest Extends TestCase
                 'expiration_year' => 2025,
                 'security_code' => 123,
             )
-        );
+        ));
+    }
 
-        $token = $this->token->create($params);
+    public function testCreate_successfullyCreateACustomer_responseObjectIsCustomer()
+    {
+        $customer = OmiseCustomer::create(array(
+            'email' => 'ss.saroj@gmail.com',
+            'card' => $this->token['id'],
+        ));
 
-        $this->assertEquals('token', $token['object']);
+        $this->assertEquals('customer', $customer['object']);
         echo "\u{1F60D}\u{1F60D}\u{1F60D}";
     }
 }
