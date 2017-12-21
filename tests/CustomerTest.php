@@ -26,6 +26,13 @@ class CustomerTest Extends TestCase
         ));
 
         $this->assertEquals('customer', $customer['object']);
+        $this->assertEquals('ss.saroj@gmail.com', $customer['email']);
+        $this->assertEquals(1, count($customer['cards']['data']));
+        $this->assertEquals('card', $customer['cards']['data'][0]['object']);
+        $this->assertEquals('4242', $customer['cards']['data'][0]['last_digits']);
+        $this->assertEquals(1, $customer['cards']['data'][0]['expiration_month']);
+        $this->assertEquals(2025, $customer['cards']['data'][0]['expiration_year']);
+        $this->assertEquals('Saroj Sangphongamphai', $customer['cards']['data'][0]['name']);
         echo "\u{1F60D}\u{1F60D}\u{1F60D}";
     }
 }
