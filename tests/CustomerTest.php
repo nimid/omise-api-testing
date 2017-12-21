@@ -18,6 +18,16 @@ class CustomerTest Extends TestCase
         ));
     }
 
+    public function testCreate_parameterIsInvalidArrayHasNoKey_customerHasBeenCreatedButCardHasNotBeenCreated()
+    {
+        $customer = OmiseCustomer::create(array(
+            $this->token['id']
+        ));
+
+        $this->assertEquals('customer', $customer['object']);
+        $this->assertEquals(0, count($customer['cards']['data']));
+    }
+
     public function testCreate_successfullyCreateACustomer_responseObjectIsCustomer()
     {
         $customer = OmiseCustomer::create(array(
